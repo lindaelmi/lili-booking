@@ -27,14 +27,13 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet/dist/leaflet.css",
               "src/styles.scss"
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
-
             "budgets": [
               {
                 "type": "initial",
@@ -67,7 +66,7 @@
             "development": {
               "optimization": false,
               "sourceMap": true,
-              "budgets": [] 
+              "budgets": []
             }
           },
           "defaultConfiguration": "production"
