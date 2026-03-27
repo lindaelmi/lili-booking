@@ -12,9 +12,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": {
-              "base": "dist/LILIBooking-frontend"
-            },
+           "outputPath": "dist/LILIBooking-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
