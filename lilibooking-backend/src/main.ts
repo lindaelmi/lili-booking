@@ -7,7 +7,7 @@ async function bootstrap() {
   // Préfixe global pour les routes (ex: /api/hotels)
   app.setGlobalPrefix('api');
 
-  // Configuration CORS : autorise le frontend Netlify et localhost
+  // Configuration CORS : autorise le frontend Netlify et localhost (développement)
   app.enableCors({
     origin: ['https://bookinglili.netlify.app', 'http://localhost:4200'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
