@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:3000/api'   // ✅ UN SEUL /api
+  production: true,
+  apiUrl: 'https://lili-booking-1.onrender.com/api'
 };
