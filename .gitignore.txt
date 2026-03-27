@@ -1,0 +1,16 @@
+# Node modules
+**/node_modules
+**/package-lock.json
+
+# Environnement
+**/.env
+**/.env.local
+
+# Fichiers de build
+**/dist
+**/build
+**/.next
+
+# Fichiers système
+.DS_Store
+Thumbs.db

@@ -1,0 +1,56 @@
+<div class="admin-services">
+  <div class="container py-4">
+    <h1 class="mb-4">Gestion des services supplémentaires</h1>
+
+    <div class="card mb-4">
+      <div class="card-header">Ajouter un service</div>
+      <div class="card-body">
+        <form (ngSubmit)="addService()" #serviceForm="ngForm">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="newService.name" name="name" required>
+            </div>
+            <div class="col-md-2 mb-3">
+              <input type="number" class="form-control" placeholder="Prix (€)" [(ngModel)]="newService.price" name="price" required min="0">
+            </div>
+            <div class="col-md-4 mb-3">
+              <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newService.description" name="description">
+            </div>
+            <div class="col-md-2 mb-3">
+              <button type="submit" class="btn btn-success w-100" [disabled]="serviceForm.invalid">
+                <i class="fas fa-plus"></i> Ajouter
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prix (€)</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of services">
+            <td>{{ s.id }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.price }}</td>
+            <td>{{ s.description }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteService(s.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

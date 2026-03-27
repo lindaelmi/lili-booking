@@ -1,0 +1,334 @@
+// Couleurs (douces et harmonieuses)
+$primary: #2c7a6e;     // vert sauge élégant
+$primary-light: #4f9e8f;
+$accent: #d9b48b;      // beige doré
+$gray-bg: #f9f7f4;
+$card-white: #ffffff;
+$text-dark: #2d3e3a;
+$text-muted: #7c8a85;
+$border-light: #e9e5df;
+$shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+$shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.08);
+$transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+
+.hotel-list-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  background: $gray-bg;
+}
+
+/* Filtres : boutons en forme de "pill" avec un style très épuré */
+.filters-section {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  .continent-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+
+    .continent-filter-btn {
+      padding: 0.6rem 1.6rem;
+      background: transparent;
+      border: 1px solid $border-light;
+      border-radius: 40px;
+      font-weight: 500;
+      color: $text-dark;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: $transition;
+      backdrop-filter: blur(2px);
+
+      &:hover {
+        border-color: $accent;
+        background: rgba($accent, 0.05);
+        transform: translateY(-1px);
+      }
+
+      &.active {
+        background: $primary;
+        border-color: $primary;
+        color: white;
+        box-shadow: 0 2px 6px rgba($primary, 0.2);
+      }
+    }
+  }
+}
+
+/* Grille et cartes */
+.hotels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.hotel-card {
+  background: $card-white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: $shadow-soft;
+  transition: $transition;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+.hotel-image {
+  position: relative;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+
+  .hotel-rating {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    border-radius: 30px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+      color: $accent;
+    }
+  }
+
+  .continent-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: $primary;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .favorite-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: $transition;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+    i {
+      font-size: 1rem;
+      color: #dc6b4a;
+    }
+
+    &.active {
+      background: #dc6b4a;
+      i {
+        color: white;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      background: white;
+    }
+  }
+}
+
+.hotel-info {
+  padding: 1.25rem;
+  flex: 1;
+
+  .hotel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: $text-dark;
+      margin: 0;
+    }
+
+    .hotel-stars {
+      color: $accent;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+  }
+
+  .hotel-location {
+    font-size: 0.85rem;
+    color: $text-muted;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    i {
+      color: $accent;
+    }
+  }
+
+  .hotel-description {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: $text-muted;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .hotel-amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.75rem 0 1rem;
+
+    .amenity {
+      background: $gray-bg;
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      color: $primary;
+      border: none;
+      transition: $transition;
+
+      &:hover {
+        background: $primary-light;
+        color: white;
+      }
+    }
+  }
+
+  .hotel-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid $border-light;
+    padding-top: 1rem;
+
+    .hotel-price {
+      .price-label {
+        font-size: 0.7rem;
+        color: $text-muted;
+      }
+      .price-amount {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: $primary;
+        line-height: 1;
+        small {
+          font-size: 0.8rem;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .hotel-actions {
+      display: flex;
+      gap: 0.5rem;
+
+      /* Boutons actions : version "outline" avec effet doux */
+      .btn-primary {
+        background: transparent;
+        border: 1px solid $primary;
+        padding: 0.5rem 1.2rem;
+        border-radius: 30px;
+        color: $primary;
+        font-weight: 500;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+          background: $primary;
+          color: white;
+          transform: translateY(-2px);
+        }
+      }
+
+      .btn-outline-primary {
+        background: transparent;
+        border: 1px solid $text-muted;
+        padding: 0.5rem 1.2rem;
+        border-radius: 30px;
+        color: $text-muted;
+        font-weight: 500;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+          border-color: $primary;
+          color: $primary;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+/* États vides / chargement */
+.loading-spinner, .error-message, .empty-message {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  max-width: 400px;
+  margin: 2rem auto;
+  box-shadow: $shadow-soft;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hotel-list-container {
+    padding: 1rem;
+  }
+  .hotels-grid {
+    gap: 1rem;
+  }
+  .hotel-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+    .hotel-actions {
+      justify-content: space-between;
+      button {
+        flex: 1;
+      }
+    }
+  }
+  .continent-filters {
+    .continent-filter-btn {
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
+    }
+  }
+}

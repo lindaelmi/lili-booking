@@ -1,0 +1,193 @@
+<div class="contact-page">
+  <div class="container">
+    <!-- En-tête avec animation -->
+    <div class="text-center mb-5 animate-fade-in-up">
+      <h1 class="section-title">Contactez-nous</h1>
+      <p class="section-subtitle">Nous sommes à votre écoute pour toute question ou réservation</p>
+    </div>
+
+    <div class="row g-5">
+      <!-- Formulaire de contact -->
+      <div class="col-lg-7">
+        <div class="contact-form-card animate-slide-in-left">
+          <div class="card-header">
+            <i class="fas fa-paper-plane"></i>
+            <h3>Envoyez-nous un message</h3>
+          </div>
+
+          <div class="card-body">
+            <!-- Messages de succès/erreur -->
+            @if (successMessage) {
+              <div class="alert alert-success animate-fade">
+                <i class="fas fa-check-circle"></i>
+                {{ successMessage }}
+              </div>
+            }
+            @if (errorMessage) {
+              <div class="alert alert-danger animate-fade">
+                <i class="fas fa-exclamation-circle"></i>
+                {{ errorMessage }}
+              </div>
+            }
+
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+              <!-- Champ Nom -->
+              <div class="form-group mb-4">
+                <label for="name" class="form-label">
+                  <i class="fas fa-user"></i> Nom complet
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  formControlName="name"
+                  class="form-control"
+                  [class.is-invalid]="name?.invalid && name?.touched"
+                  placeholder="Votre nom complet"
+                />
+                @if (name?.invalid && name?.touched) {
+                  <div class="invalid-feedback">
+                    <i class="fas fa-exclamation-circle"></i> Ce champ est requis
+                  </div>
+                }
+              </div>
+
+              <!-- Champ Email -->
+              <div class="form-group mb-4">
+                <label for="email" class="form-label">
+                  <i class="fas fa-envelope"></i> Adresse e-mail
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  class="form-control"
+                  [class.is-invalid]="email?.invalid && email?.touched"
+                  placeholder="votre@email.com"
+                />
+                @if (email?.invalid && email?.touched) {
+                  <div class="invalid-feedback">
+                    @if (email?.errors?.['required']) {
+                      <i class="fas fa-exclamation-circle"></i> Ce champ est requis
+                    }
+                    @if (email?.errors?.['email']) {
+                      <i class="fas fa-exclamation-circle"></i> Adresse e-mail invalide
+                    }
+                  </div>
+                }
+              </div>
+
+              <!-- Champ Sujet -->
+              <div class="form-group mb-4">
+                <label for="subject" class="form-label">
+                  <i class="fas fa-tag"></i> Sujet
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  formControlName="subject"
+                  class="form-control"
+                  [class.is-invalid]="subject?.invalid && subject?.touched"
+                  placeholder="Sujet de votre message"
+                />
+                @if (subject?.invalid && subject?.touched) {
+                  <div class="invalid-feedback">
+                    <i class="fas fa-exclamation-circle"></i> Ce champ est requis
+                  </div>
+                }
+              </div>
+
+              <!-- Champ Message -->
+              <div class="form-group mb-4">
+                <label for="message" class="form-label">
+                  <i class="fas fa-comment"></i> Message
+                </label>
+                <textarea
+                  id="message"
+                  formControlName="message"
+                  class="form-control"
+                  [class.is-invalid]="message?.invalid && message?.touched"
+                  rows="5"
+                  placeholder="Votre message..."
+                ></textarea>
+                @if (message?.invalid && message?.touched) {
+                  <div class="invalid-feedback">
+                    @if (message?.errors?.['required']) {
+                      <i class="fas fa-exclamation-circle"></i> Ce champ est requis
+                    }
+                    @if (message?.errors?.['minlength']) {
+                      <i class="fas fa-exclamation-circle"></i> Le message doit contenir au moins 10 caractères
+                    }
+                  </div>
+                }
+              </div>
+
+              <!-- Bouton d'envoi -->
+              <button
+                type="submit"
+                class="btn-submit"
+                [disabled]="contactForm.invalid || isLoading"
+              >
+                @if (isLoading) {
+                  <span class="spinner-border spinner-border-sm me-2"></span>
+                }
+                <i class="fas fa-paper-plane me-2"></i>
+                {{ isLoading ? 'Envoi en cours...' : 'Envoyer le message' }}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informations de contact et carte -->
+      <div class="col-lg-5">
+        <div class="contact-info animate-slide-in-right">
+          <!-- Cartes d'infos -->
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="info-content">
+              <h4>Adresse</h4>
+              <p>123 Avenue des Champs-Élysées<br>75008 Paris, France</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="info-content">
+              <h4>Téléphone</h4>
+              <p><a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="info-content">
+              <h4>Email</h4>
+              <p><a href="mailto:contact@lilibooking.com">contact@lilibooking.com</a></p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="info-content">
+              <h4>Horaires</h4>
+              <p>Lun - Ven : 9h00 - 19h00<br>Sam : 10h00 - 17h00</p>
+            </div>
+          </div>
+
+          <!-- Carte interactive (Leaflet) -->
+          <div class="map-container">
+            <div id="contact-map" style="height: 250px; border-radius: 8px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

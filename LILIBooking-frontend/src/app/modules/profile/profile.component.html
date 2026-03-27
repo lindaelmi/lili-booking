@@ -1,0 +1,89 @@
+<!-- Carte des informations personnelles -->
+<div class="row justify-content-center mb-5">
+  <div class="col-lg-8">
+    <div class="card profile-card shadow-lg border-0 overflow-hidden">
+      <div class="card-header bg-gradient-primary text-white d-flex align-items-center justify-content-between">
+        <div>
+          <i class="fas fa-user-circle fa-2x me-3"></i>
+          <h3 class="mb-0 d-inline-block">Informations personnelles</h3>
+        </div>
+        <!-- Bouton Modifier (visible seulement en mode consultation) -->
+        <button *ngIf="!editMode" class="btn btn-light btn-sm" (click)="toggleEditMode()">
+          <i class="fas fa-edit me-1"></i>Modifier
+        </button>
+      </div>
+      <div class="card-body p-4">
+        <!-- Mode consultation -->
+        <div *ngIf="!editMode" class="row">
+          <div class="col-md-6">
+            <p class="info-item">
+              <i class="fas fa-user me-2 text-primary"></i>
+              <strong>Nom complet :</strong> {{ user?.firstName }} {{ user?.lastName }}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p class="info-item">
+              <i class="fas fa-envelope me-2 text-primary"></i>
+              <strong>Email :</strong> {{ user?.email }}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p class="info-item">
+              <i class="fas fa-phone me-2 text-primary"></i>
+              <strong>Téléphone :</strong> {{ user?.phone || 'Non renseigné' }}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p class="info-item">
+              <i class="fas fa-user-tag me-2 text-primary"></i>
+              <strong>Rôle :</strong>
+              <span class="badge role-badge" [ngClass]="{'bg-admin': user?.role === 'admin', 'bg-user': user?.role === 'user'}">
+                {{ user?.role }}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Mode édition -->
+        <div *ngIf="editMode">
+          <form (ngSubmit)="saveProfile()">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Prénom</label>
+                <input type="text" class="form-control" [(ngModel)]="editForm.firstName" name="firstName" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Nom</label>
+                <input type="text" class="form-control" [(ngModel)]="editForm.lastName" name="lastName" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="editForm.email" name="email" disabled>
+                <small class="text-muted">L'email ne peut pas être modifié</small>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Téléphone</label>
+                <input type="tel" class="form-control" [(ngModel)]="editForm.phone" name="phone">
+              </div>
+            </div>
+            <div class="text-end mt-3">
+              <button type="button" class="btn btn-secondary me-2" (click)="toggleEditMode()">Annuler</button>
+              <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+                <i class="fas fa-save me-1"></i>Enregistrer
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Messages de succès/erreur -->
+        <div *ngIf="successMessage" class="alert alert-success mt-3">
+          <i class="fas fa-check-circle me-2"></i>{{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+          <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
